@@ -59,33 +59,17 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/ubuntu_regular"
                 android:text="@string/youtube"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorNote3"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textVideoTitle" />
 
             <TextView
-                android:id="@+id/textViewCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/_100_views"
-                android:textColor="@color/colorWhite"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textSource"
-                app:layout_constraintTop_toBottomOf="@id/textVideoTitle"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
                 android:id="@+id/textDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
@@ -93,7 +77,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textViewCounter"
+                app:layout_constraintStart_toEndOf="@id/textSource"
                 app:layout_constraintTop_toBottomOf="@id/textVideoTitle"
                 app:layout_constraintVertical_bias="0.0" />
 

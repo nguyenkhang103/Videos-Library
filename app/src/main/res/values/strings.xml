@@ -2,7 +2,9 @@
     <string name="app_name">VideosLibrary</string>
     <string name="this_is_title_video">This is title video</string>
     <string name="youtube">Youtube</string>
-    <string name="_100_views">100 views</string>
+    <string name="views">views</string>
     <string name="_5_days_ago">5 days ago</string>
     <string name="khang_do">Khang Do</string>
+    <string name="view_full_playlist">View Full Playlist</string>
+    <string name="_100">100</string>
 </resources>

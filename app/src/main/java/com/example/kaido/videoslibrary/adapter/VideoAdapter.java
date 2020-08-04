@@ -2,7 +2,7 @@ package com.example.kaido.videoslibrary.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +40,16 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
     public void onBindViewHolder(@NonNull VideoHolder holder, int position) {
         holder.textVideoTitle.setText(videos.get(position).getTitle());
         holder.textAuthor.setText(videos.get(position).getAuthor());
+        holder.textDateTime.setText(videos.get(position).getDateTime());
         Picasso.get().load(videos.get(position).getThumbnail()).into(holder.imageThumbnail);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("video", videos.get(position));
                 Intent intent = new Intent(context, PlayerActivity.class);
-                intent.putExtra("idVideo", videos.get(position).getId());
+                intent.putExtras(bundle);
                 view.getContext().startActivity(intent);
             }
         });
@@ -59,13 +62,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
     }
 
     public static class VideoHolder extends RecyclerView.ViewHolder{
-        TextView textVideoTitle, textAuthor;
+        TextView textVideoTitle, textAuthor, textDateTime;
         ImageView imageThumbnail;
         View view;
         public VideoHolder(@NonNull View itemView) {
             super(itemView);
             textVideoTitle = itemView.findViewById(R.id.textVideoTitle);
             textAuthor = itemView.findViewById(R.id.textAuthor);
+            textDateTime = itemView.findViewById(R.id.textDateTime);
             imageThumbnail = itemView.findViewById(R.id.imageVideo);
             view = itemView;
 

@@ -1,11 +1,14 @@
 package com.example.kaido.videoslibrary.models;
 
-public class VideoModel {
+import java.io.Serializable;
+
+public class VideoModel implements Serializable {
     String title;
     String thumbnail;
     String id;
     String dateTime;
     String author;
+    int views;
 
     public String getTitle() {
         return title;
@@ -17,6 +20,14 @@ public class VideoModel {
 
     public String getThumbnail() {
         return thumbnail;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 
     public void setThumbnail(String thumbnail) {
