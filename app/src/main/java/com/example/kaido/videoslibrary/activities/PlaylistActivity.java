@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.android.volley.Request;
@@ -17,6 +22,9 @@ import com.example.kaido.videoslibrary.adapter.PlaylistAdapter;
 import com.example.kaido.videoslibrary.models.PlaylistModel;
 import com.example.kaido.videoslibrary.utils.ConfigUtil;
 import com.example.kaido.videoslibrary.utils.DateTimeUtil;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
 
@@ -35,6 +43,8 @@ public class PlaylistActivity extends AppCompatActivity {
 
     List<PlaylistModel> playlistModels;
 
+    TextView textUsername;
+    Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,23 @@ public class PlaylistActivity extends AppCompatActivity {
         playlistAdapter = new PlaylistAdapter(playlistModels, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(playlistAdapter);
+        textUsername = findViewById(R.id.textUsername);
+
+        GoogleSignInAccount googleSignIn = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleSignIn != null) {
+            textUsername.setText(googleSignIn.getDisplayName());
+        }
+
+        btnLogout = findViewById(R.id.buttonLogout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getPlaylistFromJSONData(URL_PLAYLIST_YOUTUBE_API);
     }

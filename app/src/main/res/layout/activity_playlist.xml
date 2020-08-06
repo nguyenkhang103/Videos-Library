@@ -6,14 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".activities.PlaylistActivity">
 
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/hello"
+        android:fontFamily="@font/ubuntu_medium"
+        android:textColor="@color/colorWhite"
+        android:textSize="13sp"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textUsername"
+        app:layout_constraintBottom_toBottomOf="@id/textUsername"
+        app:layout_constraintEnd_toStartOf="@id/textUsername" />
+
+
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/kai_do"
+        android:textAllCaps="true"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogout"
+        app:layout_constraintBottom_toBottomOf="@id/buttonLogout"
+        app:layout_constraintEnd_toStartOf="@id/buttonLogout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_playlist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:includeFontPadding="false"
+        android:id="@+id/textMyPlaylist"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listPlaylist"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textMyPlaylist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

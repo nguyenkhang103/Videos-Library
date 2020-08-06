@@ -7,4 +7,11 @@
     <string name="khang_do">Khang Do</string>
     <string name="view_full_playlist">View Full Playlist</string>
     <string name="_100">100</string>
+    <string name="videos_library">Videos Library</string>
+    <string name="live_with_your_music_world">Live with your music world !!!</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="logout">Logout</string>
+    <string name="kai_do">Kai Do</string>
+    <string name="hello">Hello,</string>
+    <string name="my_playlist">My Playlist</string>
 </resources>

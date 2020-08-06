@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "525026708961",
+    "firebase_url": "https://videoslibrary-117ef.firebaseio.com",
+    "project_id": "videoslibrary-117ef",
+    "storage_bucket": "videoslibrary-117ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525026708961:android:743d78ba0c6228bb9fd6a0",
+        "android_client_info": {
+          "package_name": "com.example.kaido.videoslibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525026708961-0vmkrledfeit6vt6otlagor1klor31kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kaido.videoslibrary",
+            "certificate_hash": "ce93614d1995593c6379a8d9f685dbe411ae837b"
+          }
+        },
+        {
+          "client_id": "525026708961-a4mbrh8adta63n094s2640t76gf38v1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt-Vaa4ix-pgeUepkaPpdQVuafufpk6oI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525026708961-a4mbrh8adta63n094s2640t76gf38v1f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
