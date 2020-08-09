@@ -1,64 +1,92 @@
 package com.example.kaido.videoslibrary.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.kaido.videoslibrary.R;
+import android.widget.Button;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link VideoFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.kaido.videoslibrary.R;
+import com.example.kaido.videoslibrary.activities.LoginActivity;
+import com.example.kaido.videoslibrary.adapter.PlaylistAdapter;
+import com.example.kaido.videoslibrary.adapter.VideoAdapter;
+import com.example.kaido.videoslibrary.models.PlaylistModel;
+import com.example.kaido.videoslibrary.models.VideoModel;
+import com.example.kaido.videoslibrary.utils.ConfigUtil;
+import com.example.kaido.videoslibrary.utils.DateTimeUtil;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class VideoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView recyclerView;
+    VideoAdapter videoAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String URL_VIDEO_API = "https://raw.githubusercontent.com/bikashthapa01/myvideos-android-app/master/data.json";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment VideoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static VideoFragment newInstance(String param1, String param2) {
-        VideoFragment fragment = new VideoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    List<VideoModel> allVideos;
 
-    public VideoFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_video, container, false);
+        View view =  inflater.inflate(R.layout.fragment_video, container, false);
+        recyclerView = view.findViewById(R.id.listVideo);
+        allVideos = new ArrayList<>();
+        videoAdapter = new VideoAdapter(allVideos, getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(videoAdapter);
+
+
+        getPlaylistFromJSONData(URL_VIDEO_API);
+        return view;
+    }
+    private void getPlaylistFromJSONData(String URL_VIDEO_API) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL_VIDEO_API, null,
+                response -> {
+                    try {
+                        JSONArray categories = response.getJSONArray("categories");
+                        JSONObject categoriesData = categories.getJSONObject(0);
+                        JSONArray videos = categoriesData.getJSONArray("videos");
+
+                        for (int i = 0; i < videos.length(); i++) {
+                            JSONObject video = videos.getJSONObject(i);
+                            VideoModel v = new VideoModel();
+                            v.setTitle(video.getString("title"));
+                            v.setAuthor(video.getString("subtitle"));
+                            v.setThumbnail(video.getString("thumb"));
+                            JSONArray videoUrl = video.getJSONArray("sources");
+                            v.setId(videoUrl.getString(0));
+                            allVideos.add(v);
+                        }
+                        videoAdapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                Throwable::printStackTrace);
+        requestQueue.add(jsonObjectRequest);
     }
 }

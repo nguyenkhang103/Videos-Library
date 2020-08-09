@@ -1,28 +1,20 @@
 package com.example.kaido.videoslibrary.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.MediaCodec;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kaido.videoslibrary.R;
-import com.example.kaido.videoslibrary.adapter.VideoAdapter;
+import com.example.kaido.videoslibrary.adapter.VideoYoutubeAdapter;
 import com.example.kaido.videoslibrary.models.VideoModel;
 import com.example.kaido.videoslibrary.utils.ConfigUtil;
 import com.example.kaido.videoslibrary.utils.DateTimeUtil;
-import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 
 import org.json.JSONArray;
@@ -33,12 +25,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.volley.Request.*;
-
 public class MainActivity extends YouTubeBaseActivity {
 
     RecyclerView recyclerView;
-    VideoAdapter videoAdapter;
+    VideoYoutubeAdapter videoAdapter;
     private List<VideoModel> videos;
 
 
@@ -51,7 +41,7 @@ public class MainActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.listVideo);
         videos = new ArrayList<>();
-        videoAdapter = new VideoAdapter(videos, this);
+        videoAdapter = new VideoYoutubeAdapter(videos, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(videoAdapter);
 

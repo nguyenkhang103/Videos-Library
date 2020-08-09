@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            Intent intent = new Intent(getApplicationContext(),PlaylistActivity.class);
+            Intent intent = new Intent(getApplicationContext(),StartActivity.class);
             startActivity(intent);
         }
     }
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                assert account != null;
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -89,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), PlaylistActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                             startActivity(intent);
                             Toast.makeText(LoginActivity.this, "Sign in with Google successfully.", Toast.LENGTH_SHORT).show();
                         } else {
@@ -98,5 +100,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 }

@@ -19,28 +19,29 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder> {
+public class VideoYoutubeAdapter extends RecyclerView.Adapter<VideoYoutubeAdapter.VideoYoutubeHolder> {
     private List<VideoModel> videos;
     private Context context;
 
 
-    public VideoAdapter(List<VideoModel> videos, Context context) {
+    public VideoYoutubeAdapter(List<VideoModel> videos, Context context) {
         this.videos = videos;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public VideoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VideoYoutubeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item, parent, false);
-        return new VideoHolder(view);
+        return new VideoYoutubeHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VideoYoutubeHolder holder, int position) {
         holder.textVideoTitle.setText(videos.get(position).getTitle());
         holder.textAuthor.setText(videos.get(position).getAuthor());
         holder.textDateTime.setText(videos.get(position).getDateTime());
+        holder.textDateTime.setVisibility(View.VISIBLE);
         Picasso.get().load(videos.get(position).getThumbnail()).into(holder.imageThumbnail);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -61,11 +62,11 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
         return videos.size();
     }
 
-    public static class VideoHolder extends RecyclerView.ViewHolder{
+    public static class VideoYoutubeHolder extends RecyclerView.ViewHolder{
         TextView textVideoTitle, textAuthor, textDateTime;
         ImageView imageThumbnail;
         View view;
-        public VideoHolder(@NonNull View itemView) {
+        public VideoYoutubeHolder(@NonNull View itemView) {
             super(itemView);
             textVideoTitle = itemView.findViewById(R.id.textVideoTitle);
             textAuthor = itemView.findViewById(R.id.textAuthor);
